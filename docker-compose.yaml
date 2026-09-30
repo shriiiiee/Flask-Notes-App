@@ -1,0 +1,38 @@
+services:
+  app:
+    build: .
+    ports:
+    - "5000:5000"
+    container_name: application
+    networks:
+    - mysql
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: to_do
+    depends_on: 
+    - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: sql-app
+    volumes:
+    - mysql:/var/lib/mysql
+    networks:
+    - mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: to_do
+      
+
+networks:
+  mysql:
+volumes:
+  mysql:
+
+
+
+
+
+
